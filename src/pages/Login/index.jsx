@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Container,
   Input,
@@ -10,6 +10,7 @@ import {
 } from './styled'
 
 export default function Login({ navigation }) {
+  
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
