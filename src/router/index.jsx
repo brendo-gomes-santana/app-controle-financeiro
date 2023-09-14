@@ -1,13 +1,17 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, {useContext} from 'react'
 
 import Deslogado from './Deslogado';
 import Carregando from '../components/Carregando';
 
-export default function Router() {
+import { AuthContext } from '../context/auth';
 
-    const logado = false;
+export default function Router() {
+    
+    const { logado } = useContext(AuthContext);
+
     const carregando = false;
+
     if(carregando){
         return(
             <Carregando/>
