@@ -8,15 +8,14 @@ import { AuthContext } from '../context/auth';
 
 export default function Router() {
     
-    const { logado } = useContext(AuthContext);
+    const { logado, verificandoLogado } = useContext(AuthContext);
 
-    const carregando = false;
-
-    if(carregando){
+    if(verificandoLogado){
         return(
             <Carregando/>
         )
     }
+
     return (
         logado ? <View><Text>Logado</Text></View> : <Deslogado/>
     )

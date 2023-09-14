@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
+import { Alert } from 'react-native';
 import {
   Container,
   Input,
@@ -8,15 +9,22 @@ import {
   Link,
   TextLink
 } from './styled'
+import { AuthContext } from '../../context/auth';
 
 export default function Login({ navigation }) {
-  
+
+  const { Login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
-  function handleLogin() {
+  function handleLogin(){
+    if(email === '' || senha === '' ){
+      return Alert.alert('Preenchar todos os campos')
+    }
 
+    Login(email, senha);
   }
+
   return (
     <Container>
       <Imagem
