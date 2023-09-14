@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Alert } from 'react-native';
+import { Alert, ActivityIndicator } from 'react-native';
 import {
   Container,
   Input,
@@ -13,17 +13,10 @@ import { AuthContext } from '../../context/auth';
 
 export default function Login({ navigation }) {
 
-  const { Login } = useContext(AuthContext);
+  const { Login, carregando } = useContext(AuthContext);
+
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-
-  function handleLogin(){
-    if(email === '' || senha === '' ){
-      return Alert.alert('Preenchar todos os campos')
-    }
-
-    Login(email, senha);
-  }
 
   return (
     <Container>
@@ -37,11 +30,15 @@ export default function Login({ navigation }) {
         placeholder='Digite seu email' />
       <Input
         value={senha}
-        onChangeText={ text => setSenha(text)}
-        placeholder='Digite sua senha' 
+        onChangeText={text => setSenha(text)}
+        placeholder='Digite sua senha'
         secureTextEntry={true} />
-      <Button onPress={() => handleLogin()}>
-        <TextButton>Entrar</TextButton>
+      <Button onPress={() => Login(email, senha)}>
+        {carregando ? (
+          <ActivityIndicator size={35} color='#fff'/>
+        ) : (
+          <TextButton>Entrar</TextButton>
+        )}
       </Button>
       <Link onPress={() => navigation.navigate('NovaConta')}>
         <TextLink>Você não possui conta? Faça seu cadastro</TextLink>

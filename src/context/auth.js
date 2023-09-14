@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { getDoc, doc } from 'firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -8,11 +8,11 @@ import { firebase_auth, firebase_db } from '../config';
 
 export const AuthContext = createContext({})
 
-
 export default function Provider({ children }) {
 
   const [usuario, setUsuario] = useState(null);
   const [verificandoLogado, setVerificandoLogado] = useState(true);
+  const [carregando, setCarregando] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -29,6 +29,13 @@ export default function Provider({ children }) {
   }, [])
 
   async function Login(email, senha) {
+
+    if(email === '' || senha === '' ){
+      Alert.alert('Preenchar todos os campos')
+      return     
+    }
+    
+    setCarregando(true);
     try {
       const r = await signInWithEmailAndPassword(firebase_auth, email, senha);
 
@@ -46,15 +53,24 @@ export default function Provider({ children }) {
     } catch (err) {
       console.log('Algo deu errado', err)
     } finally {
-
+      setCarregando(false);
     }
+  }
+
+  async function DeslogarDaConta(){
+    signOut(firebase_auth);
+    await AsyncStorage.clear();
+    setUsuario(null)
+
   }
   return (
     <AuthContext.Provider value={{
       Login,
       usuario,
+      DeslogarDaConta,
       logado: !!usuario,
-      verificandoLogado
+      verificandoLogado,
+      carregando
     }}>
       {children}
     </AuthContext.Provider>
