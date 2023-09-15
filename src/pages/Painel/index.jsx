@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
-import { ActivityIndicator, FlatList } from 'react-native';
+import { ActivityIndicator, FlatList, Animated } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { firebase_db } from '../../config'
@@ -8,13 +8,13 @@ import { AuthContext } from '../../context/auth';
 import ListaDividas from '../../components/ListaDividas';
 import { Container, Titulo, NaoPossui, Atualizar, BaseTitulo } from './styled'
 
-export default function Painel() {
+export default function Painel({navigation}) {
 
   const { usuario } = useContext(AuthContext);
 
   const [dividas, setDividas] = useState([]);
   const [carregando, setCarregando] = useState(true);
-  const [carregarAtualizacao, setCarregarAtualizacao] = useState(false);
+  const [carregandoAtualicao, setCarregarAtualizacao] = useState(false);
 
   useEffect(() => {
     try {
@@ -48,8 +48,9 @@ export default function Painel() {
       setCarregando(false);
     }
   }, []);
-  function handleAtualizar(){
-    setCarregarAtualizacao(true)
+
+  function handleAtualizar() {
+    setCarregarAtualizacao(true);
     try {
       const listRef = collection(firebase_db, "dividas");
       const q = query(listRef,
@@ -81,6 +82,7 @@ export default function Painel() {
       setCarregarAtualizacao(false);
     }
   }
+
   if (carregando) {
     return (
       <Container
@@ -95,10 +97,14 @@ export default function Painel() {
 
   return (
     <Container>
-      <BaseTitulo >
+      <BaseTitulo>
         <Titulo>Contas para pagar</Titulo>
-        <Atualizar>
-          <MaterialCommunityIcons name="reload" size={30} color="#fff" />
+        <Atualizar onPress={() => handleAtualizar()}>
+          {carregandoAtualicao ? (
+            <ActivityIndicator color='#fff' size={30}/>
+          ) : (
+            <MaterialCommunityIcons name="reload" size={30} color="#fff" />
+          )}
         </Atualizar>
       </BaseTitulo>
       {dividas.length === 0 && (
@@ -106,7 +112,7 @@ export default function Painel() {
       )}
       <FlatList
         data={dividas}
-        renderItem={({ item }) => <ListaDividas data={item} />}
+        renderItem={({ item }) => <ListaDividas data={item} navigation={navigation}/>}
         keyExtractor={item => item.id}
       />
     </Container>

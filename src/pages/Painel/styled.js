@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import { Animated } from 'react-native';
 
 export const Container = styled.View`
     flex: 1;
@@ -15,6 +14,7 @@ export const BaseTitulo = styled.View`
     justify-content: space-between;
     margin-bottom: 15px;
 `;
+
 export const Atualizar = styled.TouchableOpacity`
     width: 50px;
     height: 50px;
@@ -36,3 +36,4 @@ export const Titulo = styled.Text`
     font-weight: bold;
     text-align: center;
 `;
+
