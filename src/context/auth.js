@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
+import { Alert } from 'react-native';
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { getDoc, doc } from 'firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { createContext } from "react";
 import { firebase_auth, firebase_db } from '../config';
 
 export const AuthContext = createContext({})
@@ -18,7 +18,7 @@ export default function Provider({ children }) {
     (async () => {
       const r = await AsyncStorage.getItem('@user');
       const usuario = JSON.parse(r)
-      if(!usuario){
+      if (!usuario) {
         setVerificandoLogado(false);
         setUsuario(null);
         return;
@@ -30,11 +30,11 @@ export default function Provider({ children }) {
 
   async function Login(email, senha) {
 
-    if(email === '' || senha === '' ){
+    if (email === '' || senha === '') {
       Alert.alert('Preenchar todos os campos')
-      return     
+      return
     }
-    
+
     setCarregando(true);
     try {
       const r = await signInWithEmailAndPassword(firebase_auth, email, senha);
@@ -51,13 +51,16 @@ export default function Provider({ children }) {
       await AsyncStorage.setItem("@user", JSON.stringify(data));
 
     } catch (err) {
-      console.log('Algo deu errado', err)
+      console.log('Algo deu errado:', err)
+      if (err === '[FirebaseError: Firebase: Error (auth/invalid-login-credentials).]') {
+        console.log('entrou aqui')
+      }
     } finally {
       setCarregando(false);
     }
   }
 
-  async function DeslogarDaConta(){
+  async function DeslogarDaConta() {
     signOut(firebase_auth);
     await AsyncStorage.clear();
     setUsuario(null)
