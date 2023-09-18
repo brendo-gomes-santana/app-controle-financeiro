@@ -11,7 +11,6 @@ import {
   Volta,
   Deleta,
   Base,
-  BasePagarEAlterar,
   Button,
   TextoButton,
   Descricao,
@@ -92,10 +91,7 @@ export default function Detalhe({ route, navigation }) {
       </Header>
 
       <Container>
-
-        <BasePagarEAlterar>
           <Button
-            color="#8db989"
             disabled={carregandoPagar}
             onPress={() => handlePagar()}
           >
@@ -105,17 +101,11 @@ export default function Detalhe({ route, navigation }) {
               <TextoButton>Pagar</TextoButton>
             )}
           </Button>
-          <Button
-            color="#B98989"
-          >
-            <TextoButton>Alterar</TextoButton>
-          </Button>
-        </BasePagarEAlterar>
         <Descricao>
           <Strong>Quantidade de parcelas: </Strong>{usuario.quantidade_de_parcelas}
         </Descricao>
         <Descricao>
-          <Strong>data de vescimento: </Strong>{usuario.data}
+          <Strong>Data de vescimento: </Strong>{usuario.data}
         </Descricao>
         <Descricao>
           <Strong>Valor: </Strong>{usuario.valor}

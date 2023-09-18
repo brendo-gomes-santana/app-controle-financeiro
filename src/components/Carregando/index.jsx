@@ -26,7 +26,7 @@ export default function Carregando() {
             ApareceLoading,{
                 toValue: 1,
                 useNativeDriver: true,
-                delay: 500
+                delay: 100
             }
         )
     ]).start()

@@ -18,7 +18,7 @@ export const BaseTitulo = styled.View`
 export const Atualizar = styled.TouchableOpacity`
     width: 50px;
     height: 50px;
-    background-color: #8db989;
+    background-color: transparent;
     border-radius: 100px;
 
     align-items: center;

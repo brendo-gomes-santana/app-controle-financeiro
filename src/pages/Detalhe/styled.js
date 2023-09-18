@@ -36,20 +36,21 @@ export const Container = styled.View`
     flex: 1;
     background-color: #C4C4C4;
     padding: 10px;
-`;
-export const BasePagarEAlterar = styled.View`
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-bottom: 20px;
+    position: relative;
 `;
 export const Button = styled.TouchableOpacity`
     height: 50px;
     width: 100px;
+    
+    background-color: #8db989;
+    border-radius: 10px;
+
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
-    background-color: ${props => props.color};
+
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
     `;
 export const TextoButton = styled.Text`
     color: #fff;

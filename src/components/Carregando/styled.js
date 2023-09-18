@@ -10,8 +10,7 @@ export const Container = styled.View`
     position: relative;
 `;
 export const Imagem = styled(Animated.Image)`
-    width: 90%;
-    height: 150px;
+    width: 50%;
     margin-bottom: 20px;
     position: absolute;
 `;

@@ -7,7 +7,9 @@ import {
   Input,
   Button,
   TextButton,
-  InputValor
+  InputValor,
+  Titulo,
+  BaseValorEData
 } from './styled';
 
 import { firebase_db } from '../../config';
@@ -49,28 +51,32 @@ export default function CriarParcelamento() {
 
   return (
     <Container>
+      <Titulo>Cadastre Conta à Pagar</Titulo>
       <Base>
         <Input
           value={titulo}
           onChangeText={t => setTitulo(t)}
           placeholder='Digite o Titulo' />
-        <InputValor
-          type='money'
-          value={valor}
-          onChangeText={v => {
-            setValor(v);
-          }}
-          placeholder='R$'
-        />
-        <InputValor
-          type='datetime'
-          options={{
-            format: 'DD'
-          }}
-          value={data}
-          onChangeText={d => setData(d)}
-          placeholder='DD'
-        />
+        <BaseValorEData>
+          <InputValor
+            type='money'
+            value={valor}
+            onChangeText={v => {
+              setValor(v);
+            }}
+            placeholder='R$'
+          />
+          <InputValor
+            type='datetime'
+            options={{
+              format: 'DD'
+            }}
+            value={data}
+            onChangeText={d => setData(d)}
+            placeholder='Dia do vencimento'
+          />
+        </BaseValorEData>
+
         <Input
           value={quantidade}
           onChangeText={t => setQuantidade(t)}

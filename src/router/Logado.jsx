@@ -7,6 +7,7 @@ import Painel from '../pages/Painel';
 import User from '../pages/User';
 import CriarParcelamento from '../pages/CriarParcelamento';
 import Detalhe from '../pages/Detalhe';
+
 const BottomTab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
