@@ -17,7 +17,7 @@ export default function Provider({ children }) {
   useEffect(() => {
     (async () => {
       const r = await AsyncStorage.getItem('@user');
-      const usuario = JSON.parse(r)
+      const usuario = JSON.parse(r);
       if (!usuario) {
         setVerificandoLogado(false);
         setUsuario(null);

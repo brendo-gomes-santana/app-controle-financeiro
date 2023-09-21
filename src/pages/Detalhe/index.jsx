@@ -91,16 +91,16 @@ export default function Detalhe({ route, navigation }) {
       </Header>
 
       <Container>
-          <Button
-            disabled={carregandoPagar}
-            onPress={() => handlePagar()}
-          >
-            {carregandoPagar ? (
-              <ActivityIndicator size={30} color='#fff' />
-            ) : (
-              <TextoButton>Pagar</TextoButton>
-            )}
-          </Button>
+        <Button
+          disabled={carregandoPagar}
+          onPress={() => handlePagar()}
+        >
+          {carregandoPagar ? (
+            <ActivityIndicator size={30} color='#fff' />
+          ) : (
+            <TextoButton>Pagar</TextoButton>
+          )}
+        </Button>
         <Descricao>
           <Strong>Quantidade de parcelas: </Strong>{usuario.quantidade_de_parcelas}
         </Descricao>

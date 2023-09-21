@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "app-controle-parcelamento",
+    "name": "Controle parcelamento",
     "slug": "app-controle-parcelamento",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.brendo_gomes.appcontroleparcelamento"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "720abe1c-58b3-45be-8df2-fce7623c55ed"
+      }
     }
   }
 }
